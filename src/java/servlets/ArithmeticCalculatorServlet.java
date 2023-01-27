@@ -50,7 +50,11 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
             case "%":
                 result = firstnumberI % secondnumberI;
         }
+       
+        getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculatorForm.jsp")
+                .forward(request, response);
     }
+    
     
     
 }
