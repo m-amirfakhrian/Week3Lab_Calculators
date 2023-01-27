@@ -29,21 +29,26 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
         String secondnumber = request.getParameter("secondnumber");
         String operator = request.getParameter("operator");
         
+        int firstnumberI = Integer.parseInt(firstnumber);
+        int secondnumberI = Integer.parseInt(secondnumber);
+        
         request.setAttribute("firstnumber", Integer.parseInt(firstnumber));
         request.setAttribute("secondnumber", Integer.parseInt(secondnumber));
-        request.setAttribute("operator", Integer.parseInt(operator));
+        request.setAttribute("operator", operator);
+        
+        
         
         int result;
         
         switch(operator){
             case "+":
-                result = firstnumber + secondnumber;
+                result = firstnumberI + secondnumberI;
             case "-":
-                result = firstnumber - secondnumber;
+                result = firstnumberI - secondnumberI;
             case "*":
-                result = firstnumber * secondnumber;
+                result = firstnumberI * secondnumberI;
             case "%":
-                result = firstnumber % secondnumber;
+                result = firstnumberI % secondnumberI;
         }
     }
     
