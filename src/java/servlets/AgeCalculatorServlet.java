@@ -33,6 +33,7 @@ public class AgeCalculatorServlet extends HttpServlet {
         // get age parameters from the POST request
         if((age == null || age.equals(""))){
             request.setAttribute("message" , "You must give your current age");
+            
             getServletContext().getRequestDispatcher("/WEB-INF/ageForm.jsp")
                     .forward(request, response);
             return;
@@ -56,9 +57,11 @@ public class AgeCalculatorServlet extends HttpServlet {
             request.setAttribute("message" , "You must give a correct age.");
             getServletContext().getRequestDispatcher("/WEB-INF/ageForm.jsp")
                     .forward(request, response);
+            return;
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/ageForm.jsp")
                 .forward(request, response);
+        return;
     }
 }

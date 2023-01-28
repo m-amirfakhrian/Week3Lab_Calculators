@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author Majid
  */
 public class ArithmeticCalculatorServlet extends HttpServlet {
-    
+    String result = "---";
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //String result = "---";
+        request.setAttribute("result" , result);
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculatorForm.jsp")
                 .forward(request, response);
     }
@@ -29,30 +31,45 @@ public class ArithmeticCalculatorServlet extends HttpServlet {
         String secondnumber = request.getParameter("secondnumber");
         String operator = request.getParameter("operator");
         
-        int firstnumberI = Integer.parseInt(firstnumber);
-        int secondnumberI = Integer.parseInt(secondnumber);
-        
-        request.setAttribute("firstnumber", Integer.parseInt(firstnumber));
-        request.setAttribute("secondnumber", Integer.parseInt(secondnumber));
+        request.setAttribute("firstnumber", firstnumber);
+        request.setAttribute("secondnumber", secondnumber);
         request.setAttribute("operator", operator);
         
-        
-        
-        int result;
-        
-        switch(operator){
-            case "+":
-                result = firstnumberI + secondnumberI;
-            case "-":
-                result = firstnumberI - secondnumberI;
-            case "*":
-                result = firstnumberI * secondnumberI;
-            case "%":
-                result = firstnumberI % secondnumberI;
+        try
+        {
+            int firstnumberI = Integer.parseInt(firstnumber);
+            int secondnumberI = Integer.parseInt(secondnumber);
+            
+            int resultInt = 0;
+            
+            switch(operator){
+                case "+":
+                    resultInt = firstnumberI + secondnumberI;
+                    break;
+                case "-":
+                    resultInt = firstnumberI - secondnumberI;
+                    break;
+                case "*":
+                    resultInt = firstnumberI * secondnumberI;
+                    break;
+                case "%":
+                    resultInt = firstnumberI % secondnumberI;
+                    break;
+            }
+            request.setAttribute("result" , resultInt);
         }
-       
+        catch(Exception e)
+        {
+            request.setAttribute("result" , "Invalid");
+            getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculatorForm.jsp")
+                    .forward(request, response);
+            return;
+        }
+        
+        
         getServletContext().getRequestDispatcher("/WEB-INF/arithmeticcalculatorForm.jsp")
                 .forward(request, response);
+        return;
     }
     
     
