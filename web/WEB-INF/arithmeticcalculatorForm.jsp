@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Arithmetic</title>
     </head>
     <body>
         <h1>Arithmetic Calculator</h1>
@@ -23,5 +23,6 @@
             <br>            
         </form>
             Result: <p>${result}</p>
+            <a href="age" >Age Calculator</a>
     </body>
 </html>

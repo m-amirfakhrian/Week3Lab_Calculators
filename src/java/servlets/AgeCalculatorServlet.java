@@ -38,11 +38,24 @@ public class AgeCalculatorServlet extends HttpServlet {
             return;
         }
         
-        if(age != null){
-            int ageInt = Integer.parseInt(age) + 1;
-            String messageN = "Your age next birthday will be " + ageInt;
+        
+        try
+        {
+            int ageInt = Integer.parseInt(age);
+            String messageN;
+            if (ageInt > 0){
+                messageN = "Your age next birthday will be " + ++ageInt;
+            }else
+            {
+                messageN = "Your age can not be a negative number.";
+            }
             request.setAttribute("message" , messageN);
-            return;
+        }
+        catch(Exception e)
+        {
+            request.setAttribute("message" , "You must give a correct age.");
+            getServletContext().getRequestDispatcher("/WEB-INF/ageForm.jsp")
+                    .forward(request, response);
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/ageForm.jsp")
